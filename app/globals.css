@@ -29,12 +29,19 @@
   --color-input: var(--input);
   --color-ring: var(--ring);
 
-  /* --gold is the fill/brand value; --gold-ink is the text-safe variant.
-     Light-mode --gold only reaches 3.03:1 on --background, so it must never
-     carry text. Use text-gold-ink for type, bg-gold for fills. */
-  --color-gold: var(--gold);
-  --color-gold-ink: var(--gold-ink);
-  --color-ocean-deep: var(--ocean-deep);
+  /* Anthropic brand palette. --clay is Anthropic Orange (#d97757) and is a
+     FILL value only: on the light background it reaches just 2.96:1, so it can
+     never carry text. --clay-ink is the text-safe sibling at the same hue
+     (5.7:1 light, 5.9:1 dark). Rule: text-clay-ink for type and icons,
+     bg-clay for fills, and pair bg-clay with text-ink (5.9:1). */
+  --color-clay: var(--clay);
+  --color-clay-ink: var(--clay-ink);
+  --color-ink: var(--ink);
+
+  /* Backward-compatible aliases — components still reference gold/gold-ink/ocean-deep. */
+  --color-gold: var(--clay);
+  --color-gold-ink: var(--clay-ink);
+  --color-ocean-deep: var(--ink);
 
   --radius-sm: calc(var(--radius) * 0.6);
   --radius-md: calc(var(--radius) * 0.8);
@@ -44,53 +51,60 @@
   --radius-3xl: calc(var(--radius) * 2.2);
 }
 
+/* Anthropic brand colors.
+   Core neutrals — Dark #141413, Light #faf9f5, Mid Gray #b0aea5,
+   Light Gray #e8e6dc. Primary accent — Orange #d97757.
+   Contrast ratios in the comments are measured against the surface each value
+   actually sits on; all body-text pairings clear WCAG 2.2 AA (4.5:1) and all
+   UI-boundary values clear 1.4.11 (3:1). */
 :root {
-  --background: #fbf9f6;
-  --foreground: #121820;
+  --background: #faf9f5; /* Light */
+  --foreground: #141413; /* Dark — 17.5:1 on background */
   --card: #ffffff;
-  --card-foreground: #121820;
+  --card-foreground: #141413; /* 18.4:1 */
   --popover: #ffffff;
-  --popover-foreground: #121820;
-  --primary: #c25e19;
-  --primary-foreground: #ffffff;
-  --secondary: #f3ece1;
-  --secondary-foreground: #221c17;
-  --muted: #eee7dc;
-  --muted-foreground: #645e56;
-  --accent: #d97706;
-  --accent-foreground: #121820;
-  --destructive: #b91c1c;
-  --border: #e4dcce;
-  --input: #dfd6c6;
-  --ring: #d97706;
-  --gold: #d97706;
-  --gold-ink: #9a4a08;
-  --ocean-deep: #090e14;
+  --popover-foreground: #141413;
+  --primary: #d97757; /* Orange */
+  --primary-foreground: #141413; /* 5.9:1 on primary */
+  --secondary: #e8e6dc; /* Light Gray */
+  --secondary-foreground: #141413;
+  --muted: #e8e6dc;
+  --muted-foreground: #5f5c54; /* 6.3:1 on bg, 5.3:1 on secondary */
+  --accent: #e8e6dc;
+  --accent-foreground: #141413;
+  --destructive: #b91c1c; /* 6.1:1 — kept at hue 0 so it never reads as clay */
+  --border: #ddd9cd;
+  --input: #8a867b; /* 3.5:1 on bg — control boundaries per 1.4.11 */
+  --ring: #a64526; /* 5.7:1 */
+  --clay: #d97757;
+  --clay-ink: #a64526; /* 5.7:1 bg · 6.0:1 card · 4.8:1 secondary */
+  --ink: #141413;
   --radius: 0.75rem;
 }
 
 .dark {
-  --background: #080c10;
-  --foreground: #edf2f7;
-  --card: #0f1620;
-  --card-foreground: #edf2f7;
-  --popover: #0f1620;
-  --popover-foreground: #edf2f7;
-  --primary: #e5853f;
-  --primary-foreground: #080c10;
-  --secondary: #16202c;
-  --secondary-foreground: #f0f4f8;
-  --muted: #121b26;
-  --muted-foreground: #94a3b8;
-  --accent: #223447;
-  --accent-foreground: #f8fafc;
-  --destructive: #ef4444;
-  --border: #1c2b3d;
-  --input: #1c2b3d;
-  --ring: #e5853f;
-  --gold: #e5853f;
-  --gold-ink: #e5853f;
-  --ocean-deep: #05080c;
+  --background: #141413; /* Dark */
+  --foreground: #faf9f5; /* Light — 17.5:1 on background */
+  --card: #1f1e1c;
+  --card-foreground: #faf9f5;
+  --popover: #1f1e1c;
+  --popover-foreground: #faf9f5;
+  --primary: #d97757;
+  --primary-foreground: #141413; /* 5.9:1 on primary */
+  --secondary: #262523;
+  --secondary-foreground: #faf9f5;
+  --muted: #1f1e1c;
+  --muted-foreground: #b0aea5; /* Mid Gray — 8.3:1 bg · 7.5:1 card */
+  --accent: #262523;
+  --accent-foreground: #faf9f5;
+  --destructive: #ef4444; /* 4.9:1 */
+  --border: #302e2b;
+  --input: #6b6862; /* 3.3:1 on bg — 1.4.11 */
+  --ring: #d97757; /* 5.9:1 */
+  --clay: #d97757;
+  /* Orange already clears AA on the dark surfaces, so ink and fill converge. */
+  --clay-ink: #d97757; /* 5.9:1 bg · 5.3:1 card · 4.9:1 secondary */
+  --ink: #141413;
 }
 
 /* Scroll-entry fade-in animation per the minimalist-ui protocol.
@@ -115,7 +129,7 @@
   .hero-glow {
     background: radial-gradient(
       ellipse 55% 45% at 72% 30%,
-      color-mix(in oklab, var(--gold) 9%, transparent),
+      color-mix(in oklab, var(--clay) 9%, transparent),
       transparent 70%
     );
   }
@@ -165,8 +179,8 @@
     }
   }
   ::selection {
-    background-color: var(--gold);
-    color: var(--ocean-deep);
+    background-color: var(--clay);
+    color: var(--ink);
   }
 
   /* Every interactive element gets a visible focus ring. Individual
