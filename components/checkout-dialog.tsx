@@ -11,16 +11,16 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import {
-  DownloadCloud,
-  CheckCircle2,
+  CloudArrowDown,
+  CheckCircle,
   Lock,
-  Sparkles,
+  Sparkle,
   CreditCard,
-  Smartphone,
+  DeviceMobile,
   Copy,
   Check,
   Tag,
-} from "lucide-react";
+} from "@phosphor-icons/react";
 import { toast } from "sonner";
 import { cn } from "@/lib/utils";
 
@@ -95,7 +95,7 @@ export function CheckoutDialog({
         }
       }}
     >
-      <DialogContent className="sm:max-w-lg p-0 overflow-hidden rounded-2xl border-border bg-card shadow-2xl">
+      <DialogContent className="sm:max-w-lg p-0 overflow-hidden rounded-2xl border-border bg-card shadow-[0_2px_20px_rgba(0,0,0,0.05)]">
         {!isSuccess ? (
           <div>
             {/* Header */}
@@ -105,7 +105,7 @@ export function CheckoutDialog({
                   Direct DRM-Free Purchase
                 </span>
                 <span className="flex items-center gap-1 text-[11px] font-mono text-muted-foreground">
-                  <Lock className="size-3 text-gold" />
+                  <Lock weight="bold" className="size-3 text-gold" />
                   <span>256-bit Encrypted</span>
                 </span>
               </div>
@@ -206,7 +206,7 @@ export function CheckoutDialog({
                     onClick={applyDiscount}
                     className="h-9 px-3 rounded-xl text-xs font-mono shrink-0"
                   >
-                    <Tag className="size-3 text-gold mr-1" />
+                    <Tag weight="bold" className="size-3 text-gold mr-1" />
                     Apply
                   </Button>
                 </div>
@@ -233,7 +233,7 @@ export function CheckoutDialog({
                         : "border-border bg-secondary/40 text-muted-foreground"
                     )}
                   >
-                    <CreditCard className="size-3.5 text-gold" />
+                    <CreditCard weight="bold" className="size-3.5 text-gold" />
                     <span>Credit / Debit Card</span>
                   </button>
 
@@ -247,7 +247,7 @@ export function CheckoutDialog({
                         : "border-border bg-secondary/40 text-muted-foreground"
                     )}
                   >
-                    <Smartphone className="size-3.5 text-gold" />
+                    <DeviceMobile weight="bold" className="size-3.5 text-gold" />
                     <span>Apple / Google Pay</span>
                   </button>
                 </div>
@@ -257,16 +257,16 @@ export function CheckoutDialog({
               <Button
                 type="submit"
                 disabled={isProcessing}
-                className="w-full h-12 rounded-xl bg-gold hover:bg-gold/90 text-ocean-deep font-bold text-sm shadow-xl flex items-center justify-center gap-2"
+                className="w-full h-12 rounded-xl bg-gold hover:bg-gold/90 text-ocean-deep font-bold text-sm shadow-[0_1px_8px_rgba(0,0,0,0.04)] flex items-center justify-center gap-2"
               >
                 {isProcessing ? (
                   <>
-                    <Sparkles className="size-4 animate-spin" />
+                    <Sparkle weight="fill" className="size-4 animate-spin" />
                     <span>Authorizing Payment...</span>
                   </>
                 ) : (
                   <>
-                    <Lock className="size-4" />
+                    <Lock weight="bold" className="size-4" />
                     <span>Pay ${finalPrice}.00 & Unlock Handbook</span>
                   </>
                 )}
@@ -276,8 +276,8 @@ export function CheckoutDialog({
         ) : (
           /* SUCCESS STATE */
           <div className="p-8 text-center space-y-6">
-            <div className="size-16 rounded-full bg-emerald-500/20 text-emerald-400 mx-auto flex items-center justify-center shadow-lg animate-in zoom-in-50">
-              <CheckCircle2 className="size-8" />
+            <div className="size-16 rounded-full bg-emerald-500/20 text-emerald-400 mx-auto flex items-center justify-center shadow-[0_1px_8px_rgba(0,0,0,0.04)] animate-in zoom-in-50">
+              <CheckCircle weight="fill" className="size-8" />
             </div>
 
             <div className="space-y-2">
@@ -297,9 +297,9 @@ export function CheckoutDialog({
               <a
                 href="/downloads/automating-with-ai-beginner-handbook.pdf"
                 download="automating-with-ai-beginner-handbook.pdf"
-                className="w-full h-12 rounded-xl bg-gold hover:bg-gold/90 text-ocean-deep font-bold text-sm shadow-md flex items-center justify-center gap-2 transition-all"
+                className="w-full h-12 rounded-xl bg-gold hover:bg-gold/90 text-ocean-deep font-bold text-sm shadow-[0_1px_6px_rgba(0,0,0,0.04)] flex items-center justify-center gap-2 transition-all"
               >
-                <DownloadCloud className="size-4.5" />
+                <CloudArrowDown weight="bold" className="size-4.5" />
                 <span>Download PDF Handbook (450 KB)</span>
               </a>
 
@@ -318,7 +318,7 @@ export function CheckoutDialog({
                 onClick={copyToken}
                 className="text-gold hover:underline flex items-center gap-1 shrink-0"
               >
-                {copied ? <Check className="size-3.5" /> : <Copy className="size-3.5" />}
+                {copied ? <Check weight="bold" className="size-3.5" /> : <Copy weight="bold" className="size-3.5" />}
                 <span>{copied ? "Copied" : "Copy"}</span>
               </button>
             </div>

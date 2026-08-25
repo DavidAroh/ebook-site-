@@ -11,14 +11,14 @@ import {
 import { Button } from "@/components/ui/button";
 import {
   BookOpen,
-  Sliders,
+  SlidersHorizontal,
   Bookmark,
   ArrowRight,
-  Sparkles,
-  DownloadCloud,
+  Sparkle,
+  CloudArrowDown,
   Copy,
   Check,
-} from "lucide-react";
+} from "@phosphor-icons/react";
 import { toast } from "sonner";
 import { cn } from "@/lib/utils";
 
@@ -90,7 +90,7 @@ export function InteractiveReader({
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent
         className={cn(
-          "max-w-4xl w-[95vw] h-[90vh] p-0 flex flex-col overflow-hidden rounded-2xl border transition-colors duration-300 shadow-2xl",
+          "max-w-4xl w-[95vw] h-[90vh] p-0 flex flex-col overflow-hidden rounded-2xl border transition-colors duration-300 shadow-[0_2px_20px_rgba(0,0,0,0.05)]",
           currentTheme.bg,
           currentTheme.text
         )}
@@ -104,7 +104,7 @@ export function InteractiveReader({
         >
           <div className="flex items-center gap-3">
             <div className="size-9 rounded-xl bg-gold/15 text-gold flex items-center justify-center font-bold">
-              <BookOpen className="size-4.5" />
+              <BookOpen weight="bold" className="size-4.5" />
             </div>
             <div>
               <DialogTitle
@@ -132,7 +132,7 @@ export function InteractiveReader({
                 currentTheme.panel
               )}
             >
-              <Sliders className="size-3.5" />
+              <SlidersHorizontal weight="bold" className="size-3.5" />
               <span className="hidden sm:inline">Preferences</span>
             </Button>
 
@@ -152,7 +152,7 @@ export function InteractiveReader({
               )}
               title={isBookmarked ? "Bookmarked" : "Add bookmark"}
             >
-              <Bookmark className={cn("size-4", isBookmarked && "fill-gold")} />
+              <Bookmark weight={isBookmarked ? "fill" : "bold"} className="size-4" />
             </Button>
           </div>
         </DialogHeader>
@@ -178,7 +178,7 @@ export function InteractiveReader({
               className={cn(
                 "px-3 py-1 rounded-lg transition-all shrink-0 font-medium",
                 activeChapter === ch.id
-                  ? "bg-gold text-ocean-deep font-bold shadow-sm"
+                  ? "bg-gold text-ocean-deep font-bold shadow-[0_1px_3px_rgba(0,0,0,0.03)]"
                   : "opacity-70 hover:opacity-100 hover:bg-black/10 dark:hover:bg-white/10"
               )}
             >
@@ -212,7 +212,7 @@ export function InteractiveReader({
                   className={cn(
                     "px-2.5 py-1 rounded-md border text-[11px] font-medium transition-all",
                     theme === t.id
-                      ? "border-gold text-gold font-semibold shadow-sm"
+                      ? "border-gold text-gold font-semibold shadow-[0_1px_3px_rgba(0,0,0,0.03)]"
                       : "border-transparent opacity-65 hover:opacity-100"
                   )}
                 >
@@ -504,7 +504,7 @@ export function InteractiveReader({
                   )}
                 >
                   <span className="font-mono text-xs uppercase tracking-wider text-gold font-bold flex items-center gap-1.5">
-                    <Sparkles className="size-4" />
+                    <Sparkle weight="fill" className="size-4" />
                     The Single Most Powerful Prompting Trick
                   </span>
                   <p className="text-lg font-bold">
@@ -538,9 +538,9 @@ export function InteractiveReader({
                       className="h-7 px-2 text-xs font-mono shrink-0 gap-1 text-gold"
                     >
                       {copiedPrompt === "leading" ? (
-                        <Check className="size-3.5" />
+                        <Check weight="bold" className="size-3.5" />
                       ) : (
-                        <Copy className="size-3.5" />
+                        <Copy weight="bold" className="size-3.5" />
                       )}
                       <span>Copy</span>
                     </Button>
@@ -574,9 +574,9 @@ export function InteractiveReader({
                       className="h-7 px-2 text-xs font-mono gap-1 text-gold"
                     >
                       {copiedPrompt === "universal" ? (
-                        <Check className="size-3.5" />
+                        <Check weight="bold" className="size-3.5" />
                       ) : (
-                        <Copy className="size-3.5" />
+                        <Copy weight="bold" className="size-3.5" />
                       )}
                       <span>Copy Template</span>
                     </Button>
@@ -619,12 +619,12 @@ Before you start, ask me any clarifying questions if something is unclear.`}
             {/* End of Excerpt / Call to Action */}
             <div
               className={cn(
-                "mt-12 p-8 rounded-2xl border text-center space-y-4 shadow-lg",
+                "mt-12 p-8 rounded-2xl border text-center space-y-4 shadow-[0_1px_8px_rgba(0,0,0,0.04)]",
                 currentTheme.panel
               )}
             >
               <div className="size-12 rounded-full bg-gold/20 text-gold mx-auto flex items-center justify-center">
-                <Sparkles className="size-6" />
+                <Sparkle weight="fill" className="size-6" />
               </div>
               <h3 className="text-xl sm:text-2xl font-sans font-bold">
                 Unlock All 15 Chapters & 7 Workflow Blueprints
@@ -640,9 +640,9 @@ Before you start, ask me any clarifying questions if something is unclear.`}
                     onOpenChange(false);
                     onBuyClick?.();
                   }}
-                  className="bg-gold text-ocean-deep hover:bg-gold/90 font-bold px-6 h-11 rounded-xl shadow-md gap-2"
+                  className="bg-gold text-ocean-deep hover:bg-gold/90 font-bold px-6 h-11 rounded-xl shadow-[0_1px_6px_rgba(0,0,0,0.04)] gap-2"
                 >
-                  <DownloadCloud className="size-4" />
+                  <CloudArrowDown weight="bold" className="size-4" />
                   <span>Get Full Handbook — $19</span>
                   <ArrowRight className="size-4" />
                 </Button>
@@ -651,7 +651,7 @@ Before you start, ask me any clarifying questions if something is unclear.`}
                   download="automating-with-ai-beginner-handbook.pdf"
                   className="inline-flex items-center gap-1.5 px-4 h-11 rounded-xl border border-current/20 font-mono text-xs hover:bg-black/10 dark:hover:bg-white/10 transition-colors"
                 >
-                  <DownloadCloud className="size-3.5 text-gold" />
+                  <CloudArrowDown weight="bold" className="size-3.5 text-gold" />
                   <span>Download Free PDF Sample</span>
                 </a>
               </div>

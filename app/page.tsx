@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { ArrowRight, BookOpen } from "lucide-react";
+import { ArrowRight, BookOpen } from "@phosphor-icons/react";
 
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
@@ -12,6 +12,7 @@ import { AuthorSection } from "@/components/author-section";
 import { FaqSection } from "@/components/faq-section";
 import { CheckoutDialog } from "@/components/checkout-dialog";
 import { Button } from "@/components/ui/button";
+import { FadeIn } from "@/components/fade-in";
 
 const LESSONS = [
   {
@@ -97,7 +98,7 @@ export default function Home() {
                 A practitioner&apos;s handbook by Shammah Nei
               </p>
 
-              <h1 className="text-5xl font-semibold leading-[1.05] text-foreground sm:text-6xl">
+              <h1 className="text-5xl font-semibold text-foreground sm:text-6xl">
                 Automating with AI
               </h1>
 
@@ -114,7 +115,7 @@ export default function Home() {
                   className="group h-11 gap-2 rounded-md bg-gold font-semibold text-ocean-deep hover:bg-gold/90"
                 >
                   Get the handbook — $19
-                  <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" />
+                  <ArrowRight weight="bold" className="size-4 transition-transform group-hover:translate-x-0.5" />
                 </Button>
 
                 <Button
@@ -123,7 +124,7 @@ export default function Home() {
                   onClick={() => setReaderOpen(true)}
                   className="h-11 gap-2 rounded-md text-foreground hover:bg-secondary"
                 >
-                  <BookOpen className="size-4" />
+                  <BookOpen weight="bold" className="size-4" />
                   Read a sample
                 </Button>
               </div>
@@ -140,6 +141,7 @@ export default function Home() {
         </section>
 
         {/* What you'll learn */}
+        <FadeIn>
         <section id="learn" className="scroll-mt-16 border-b border-border">
           <div className="mx-auto max-w-5xl px-6 py-20 sm:py-28">
             <p className="text-xs font-medium uppercase tracking-[0.18em] text-gold-ink">
@@ -177,8 +179,10 @@ export default function Home() {
             </dl>
           </div>
         </section>
+        </FadeIn>
 
         {/* Contents */}
+        <FadeIn>
         <section
           id="contents"
           className="scroll-mt-16 border-b border-border bg-secondary"
@@ -225,20 +229,27 @@ export default function Home() {
               onClick={() => setReaderOpen(true)}
               className="mt-12 h-11 gap-2 rounded-md"
             >
-              <BookOpen className="size-4" />
+              <BookOpen weight="bold" className="size-4" />
               Read the free chapters
             </Button>
           </div>
         </section>
+        </FadeIn>
 
+        <FadeIn>
         <PricingTiers
           onSelectTier={openCheckout}
           onOpenSample={() => setReaderOpen(true)}
         />
+        </FadeIn>
 
+        <FadeIn>
         <AuthorSection />
+        </FadeIn>
 
+        <FadeIn>
         <FaqSection />
+        </FadeIn>
       </main>
 
       <SiteFooter />

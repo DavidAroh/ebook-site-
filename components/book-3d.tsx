@@ -76,7 +76,7 @@ export function Book3D({ className, onSampleClick }: Book3DProps) {
         </span>
 
         {/* Front cover */}
-        <span className="relative block h-full w-full overflow-hidden rounded-[3px] shadow-[0_10px_30px_rgba(0,0,0,0.28)] ring-1 ring-black/10">
+        <span className="relative block h-full w-full overflow-hidden rounded-[3px] shadow-[0_2px_16px_rgba(0,0,0,0.06)] ring-1 ring-black/10">
           <Image
             src="/images/ai-book-cover.jpg"
             alt="Automating with AI: Beginner Handbook by Shammah Nei"

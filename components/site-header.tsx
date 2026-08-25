@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { useTheme } from "next-themes";
-import { Sun, Moon, Menu, X } from "lucide-react";
+import { Sun, Moon, List, X } from "@phosphor-icons/react";
 import { Button } from "@/components/ui/button";
 
 interface SiteHeaderProps {
@@ -55,7 +55,7 @@ export function SiteHeader({ onOpenSample, onOpenCheckout }: SiteHeaderProps) {
             onClick={() => setTheme(isDark ? "light" : "dark")}
             className="size-9 rounded-md text-muted-foreground hover:text-foreground"
           >
-            {isDark ? <Moon className="size-4" /> : <Sun className="size-4" />}
+            {isDark ? <Moon weight="bold" className="size-4" /> : <Sun weight="bold" className="size-4" />}
             <span className="sr-only">
               Switch to {isDark ? "light" : "dark"} theme
             </span>
@@ -84,7 +84,7 @@ export function SiteHeader({ onOpenSample, onOpenCheckout }: SiteHeaderProps) {
             aria-controls="mobile-nav"
             className="size-9 rounded-md lg:hidden"
           >
-            {menuOpen ? <X className="size-5" /> : <Menu className="size-5" />}
+            {menuOpen ? <X weight="bold" className="size-5" /> : <List weight="bold" className="size-5" />}
             <span className="sr-only">
               {menuOpen ? "Close menu" : "Open menu"}
             </span>

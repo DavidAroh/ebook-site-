@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { CheckCircle2 } from "lucide-react";
+import { CheckCircle } from "@phosphor-icons/react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -26,8 +26,9 @@ export function EmailSignup() {
         role="status"
         className="flex items-start gap-2.5 pt-1 text-sm text-muted-foreground"
       >
-        <CheckCircle2
+        <CheckCircle
           aria-hidden="true"
+          weight="fill"
           className="mt-0.5 size-4 shrink-0 text-gold-ink"
         />
         <span>
