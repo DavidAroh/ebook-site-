@@ -4,7 +4,6 @@ import { useState } from "react";
 import Link from "next/link";
 import { useTheme } from "next-themes";
 import { Sun, Moon, List, X } from "@phosphor-icons/react";
-import { Button } from "@/components/ui/button";
 
 const NAV_ITEMS = [
   { label: "Why this book", href: "#learn" },
@@ -17,79 +16,77 @@ export function SiteHeader() {
   const isDark = resolvedTheme === "dark";
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-border bg-background/85 backdrop-blur-md">
-      <div className="mx-auto flex h-16 max-w-5xl items-center justify-between gap-4 px-6">
+    <>
+      {/* Floating glass pill nav */}
+      <nav
+        aria-label="Main"
+        className="fixed top-5 left-1/2 z-50 flex -translate-x-1/2 items-center gap-1 rounded-full border border-border/60 bg-background/70 px-2 py-1.5 backdrop-blur-xl supports-[backdrop-filter]:bg-background/50"
+      >
         <Link
           href="#top"
-          className="whitespace-nowrap rounded-sm text-[15px] font-semibold tracking-tight text-foreground"
+          className="whitespace-nowrap rounded-full px-4 py-1.5 text-sm font-semibold tracking-tight text-foreground transition-colors hover:bg-foreground/5"
         >
           Automating with AI
         </Link>
 
-        <nav
-          className="hidden items-center gap-6 lg:flex"
-          aria-label="Sections"
+        <span className="mx-1 h-4 w-px bg-border" aria-hidden="true" />
+
+        {NAV_ITEMS.map((item) => (
+          <Link
+            key={item.href}
+            href={item.href}
+            className="rounded-full px-4 py-1.5 text-sm text-muted-foreground transition-colors hover:bg-foreground/5 hover:text-foreground"
+          >
+            {item.label}
+          </Link>
+        ))}
+
+        <span className="mx-1 h-4 w-px bg-border" aria-hidden="true" />
+
+        <button
+          type="button"
+          onClick={() => setTheme(isDark ? "light" : "dark")}
+          className="flex size-8 items-center justify-center rounded-full text-muted-foreground transition-colors hover:bg-foreground/5 hover:text-foreground"
+          aria-label={`Switch to ${isDark ? "light" : "dark"} theme`}
         >
-          {NAV_ITEMS.map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              className="rounded-sm text-sm text-muted-foreground transition-colors hover:text-foreground"
-            >
-              {item.label}
-            </Link>
-          ))}
-        </nav>
+          {isDark ? (
+            <Moon weight="bold" className="size-3.5" />
+          ) : (
+            <Sun weight="bold" className="size-3.5" />
+          )}
+        </button>
 
-        <div className="flex items-center gap-2">
-          <Button
-            variant="ghost"
-            size="icon"
-            onClick={() => setTheme(isDark ? "light" : "dark")}
-            className="size-9 rounded-md text-muted-foreground hover:text-foreground"
-          >
-            {isDark ? (
-              <Moon weight="bold" className="size-4" />
-            ) : (
-              <Sun weight="bold" className="size-4" />
-            )}
-            <span className="sr-only">
-              Switch to {isDark ? "light" : "dark"} theme
-            </span>
-          </Button>
+        <a
+          href="#download"
+          className="hidden rounded-full bg-clay px-4 py-1.5 text-sm font-semibold text-ink transition-colors hover:bg-clay/90 sm:inline-flex"
+        >
+          Get it free
+        </a>
 
-          <a
-            href="#download"
-            className="hidden h-9 items-center rounded-md bg-clay px-4 text-sm font-semibold text-ink transition-colors hover:bg-clay/90 sm:inline-flex"
-          >
-            Get it free
-          </a>
+        {/* Mobile menu toggle */}
+        <button
+          type="button"
+          onClick={() => setMenuOpen(!menuOpen)}
+          aria-expanded={menuOpen}
+          aria-controls="mobile-nav"
+          className="flex size-8 items-center justify-center rounded-full text-muted-foreground transition-colors hover:bg-foreground/5 hover:text-foreground lg:hidden"
+        >
+          {menuOpen ? (
+            <X weight="bold" className="size-4" />
+          ) : (
+            <List weight="bold" className="size-4" />
+          )}
+          <span className="sr-only">
+            {menuOpen ? "Close menu" : "Open menu"}
+          </span>
+        </button>
+      </nav>
 
-          <Button
-            variant="ghost"
-            size="icon"
-            onClick={() => setMenuOpen(!menuOpen)}
-            aria-expanded={menuOpen}
-            aria-controls="mobile-nav"
-            className="size-9 rounded-md lg:hidden"
-          >
-            {menuOpen ? (
-              <X weight="bold" className="size-5" />
-            ) : (
-              <List weight="bold" className="size-5" />
-            )}
-            <span className="sr-only">
-              {menuOpen ? "Close menu" : "Open menu"}
-            </span>
-          </Button>
-        </div>
-      </div>
-
+      {/* Mobile dropdown */}
       {menuOpen && (
-        <nav
+        <div
           id="mobile-nav"
-          aria-label="Sections"
-          className="border-t border-border bg-background px-6 py-4 lg:hidden animate-in fade-in slide-in-from-top-2 duration-200"
+          className="fixed inset-x-4 top-20 z-50 rounded-2xl border border-border/60 bg-background/90 p-4 backdrop-blur-xl animate-in fade-in slide-in-from-top-2 duration-200 lg:hidden"
         >
           <ul className="flex flex-col">
             {NAV_ITEMS.map((item) => (
@@ -97,15 +94,15 @@ export function SiteHeader() {
                 <Link
                   href={item.href}
                   onClick={() => setMenuOpen(false)}
-                  className="block rounded-sm py-2.5 text-sm text-foreground"
+                  className="block rounded-xl px-4 py-3 text-sm text-foreground transition-colors hover:bg-foreground/5"
                 >
                   {item.label}
                 </Link>
               </li>
             ))}
           </ul>
-        </nav>
+        </div>
       )}
-    </header>
+    </>
   );
 }

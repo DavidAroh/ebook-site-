@@ -90,9 +90,6 @@ export function Book3D({ className, onSampleClick }: Book3DProps) {
         </span>
       </span>
 
-      <span className="mt-5 block text-center text-sm text-muted-foreground transition-colors group-hover:text-foreground">
-        Read a sample
-      </span>
     </button>
   );
 }
