@@ -60,7 +60,7 @@ export function SiteHeader() {
 
           <a
             href="#download"
-            className="hidden h-9 items-center rounded-md bg-foreground px-4 text-sm font-semibold text-background transition-colors hover:bg-foreground/80 sm:inline-flex"
+            className="hidden h-9 items-center rounded-md bg-clay px-4 text-sm font-semibold text-ink transition-colors hover:bg-clay/90 sm:inline-flex"
           >
             Get it free
           </a>

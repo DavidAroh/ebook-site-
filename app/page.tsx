@@ -52,7 +52,7 @@ export default function Home() {
 
               <a
                 href="#download"
-                className="inline-flex items-center gap-2 rounded-md bg-foreground px-5 py-3 text-sm font-semibold text-background transition-colors hover:bg-foreground/80"
+                className="inline-flex items-center gap-2 rounded-md bg-clay px-5 py-3 text-sm font-semibold text-ink transition-colors hover:bg-clay/90"
               >
                 Get the free chapters
                 <ArrowDown weight="bold" className="size-4" />
