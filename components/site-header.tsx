@@ -6,19 +6,12 @@ import { useTheme } from "next-themes";
 import { Sun, Moon, List, X } from "@phosphor-icons/react";
 import { Button } from "@/components/ui/button";
 
-interface SiteHeaderProps {
-  onOpenSample?: () => void;
-  onOpenCheckout?: () => void;
-}
-
 const NAV_ITEMS = [
-  { label: "What you'll learn", href: "#learn" },
-  { label: "Contents", href: "#contents" },
+  { label: "Why this book", href: "#learn" },
   { label: "Author", href: "#author" },
-  { label: "FAQ", href: "#faq" },
 ];
 
-export function SiteHeader({ onOpenSample, onOpenCheckout }: SiteHeaderProps) {
+export function SiteHeader() {
   const { resolvedTheme, setTheme } = useTheme();
   const [menuOpen, setMenuOpen] = useState(false);
   const isDark = resolvedTheme === "dark";
@@ -55,26 +48,22 @@ export function SiteHeader({ onOpenSample, onOpenCheckout }: SiteHeaderProps) {
             onClick={() => setTheme(isDark ? "light" : "dark")}
             className="size-9 rounded-md text-muted-foreground hover:text-foreground"
           >
-            {isDark ? <Moon weight="bold" className="size-4" /> : <Sun weight="bold" className="size-4" />}
+            {isDark ? (
+              <Moon weight="bold" className="size-4" />
+            ) : (
+              <Sun weight="bold" className="size-4" />
+            )}
             <span className="sr-only">
               Switch to {isDark ? "light" : "dark"} theme
             </span>
           </Button>
 
-          <Button
-            variant="ghost"
-            onClick={onOpenSample}
-            className="hidden h-9 rounded-md px-3 text-sm text-muted-foreground hover:text-foreground sm:inline-flex"
+          <a
+            href="#download"
+            className="hidden h-9 items-center rounded-md bg-foreground px-4 text-sm font-semibold text-background transition-colors hover:bg-foreground/80 sm:inline-flex"
           >
-            Sample
-          </Button>
-
-          <Button
-            onClick={onOpenCheckout}
-            className="h-9 rounded-md bg-gold px-4 text-sm font-semibold text-ocean-deep hover:bg-gold/90"
-          >
-            Get it — $19
-          </Button>
+            Get it free
+          </a>
 
           <Button
             variant="ghost"
@@ -84,7 +73,11 @@ export function SiteHeader({ onOpenSample, onOpenCheckout }: SiteHeaderProps) {
             aria-controls="mobile-nav"
             className="size-9 rounded-md lg:hidden"
           >
-            {menuOpen ? <X weight="bold" className="size-5" /> : <List weight="bold" className="size-5" />}
+            {menuOpen ? (
+              <X weight="bold" className="size-5" />
+            ) : (
+              <List weight="bold" className="size-5" />
+            )}
             <span className="sr-only">
               {menuOpen ? "Close menu" : "Open menu"}
             </span>
@@ -110,18 +103,6 @@ export function SiteHeader({ onOpenSample, onOpenCheckout }: SiteHeaderProps) {
                 </Link>
               </li>
             ))}
-            <li className="sm:hidden">
-              <button
-                type="button"
-                onClick={() => {
-                  setMenuOpen(false);
-                  onOpenSample?.();
-                }}
-                className="block rounded-sm py-2.5 text-sm text-foreground"
-              >
-                Read a sample
-              </button>
-            </li>
           </ul>
         </nav>
       )}
