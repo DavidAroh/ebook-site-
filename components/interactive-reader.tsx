@@ -113,10 +113,10 @@ export function InteractiveReader({
                   currentTheme.text
                 )}
               >
-                Automating with AI
+                The New Way of Work
               </DialogTitle>
               <DialogDescription className="font-mono text-xs opacity-75">
-                Shammah Nei · Beginner Practitioner Edition
+                Shammah Nei · First Edition
               </DialogDescription>
             </div>
           </div>
@@ -646,13 +646,17 @@ Before you start, ask me any clarifying questions if something is unclear.`}
                   <span>Get Full Handbook — $19</span>
                   <ArrowRight className="size-4" />
                 </Button>
+                {/* The sample is delivered by email, not served from public/ —
+                    a file under public/ is reachable by URL, which would make the
+                    signed link in the mail pointless. Closes the reader so the
+                    hash lands on a section the reader can actually see. */}
                 <a
-                  href="/downloads/automating-with-ai-beginner-handbook.pdf"
-                  download="automating-with-ai-beginner-handbook.pdf"
+                  href="#download"
+                  onClick={() => onOpenChange(false)}
                   className="inline-flex items-center gap-1.5 px-4 h-11 rounded-xl border border-current/20 font-mono text-xs hover:bg-black/10 dark:hover:bg-white/10 transition-colors"
                 >
                   <CloudArrowDown weight="bold" className="size-3.5 text-gold" />
-                  <span>Download Free PDF Sample</span>
+                  <span>Get the Free Sample</span>
                 </a>
               </div>
             </div>

@@ -21,36 +21,47 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  /* TODO: point this at the real deployed origin. It is only used to expand the
+     relative OG/Twitter image paths below into absolute URLs, so while it is
+     wrong those tags advertise a domain that is not this site. */
   metadataBase: new URL("https://automatingwithai.com"),
-  title: "Automating with AI: Beginner Handbook — by Shammah Nei",
+  title: "The New Way of Work — by Shammah Nei",
   description:
-    "A gentle, scenario-based introduction to using AI to do real work for you with prompting craft, project design, and systems thinking. Instant DRM-Free PDF + EPUB.",
+    "A practical guide to automate, amplify and work smarter with AI. The prompting craft, the project setup, and the systems thinking behind real AI workflows. No code required.",
   openGraph: {
-    title: "Automating with AI: Beginner Handbook — by Shammah Nei",
+    title: "The New Way of Work — by Shammah Nei",
     description:
-      "A gentle, scenario-based guide to automating 7 real workflows with Claude (Anthropic). 100% DRM-Free instant edition.",
+      "A practical guide to automate, amplify and work smarter with AI. First edition, by Shammah Nei.",
     type: "website",
-    siteName: "Automating with AI",
+    siteName: "The New Way of Work",
     images: [
       {
-        url: "/images/ai-book-cover.jpg",
-        width: 1200,
-        height: 800,
-        alt: "Automating with AI Book Cover",
+        /* The cover is 2:3 portrait. Most platforms crop OG images to roughly
+           1.91:1, so this gets centre-cropped hard. A dedicated landscape
+           opengraph-image.tsx is the real fix. */
+        url: "/images/the-new-way-of-work-cover.jpg",
+        width: 1024,
+        height: 1536,
+        alt: "Cover of The New Way of Work by Shammah Nei",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Automating with AI: Beginner Handbook — by Shammah Nei",
+    title: "The New Way of Work — by Shammah Nei",
     description:
-      "A gentle, scenario-based guide to automating 7 real workflows with Claude (Anthropic). Instant DRM-Free PDF + EPUB.",
-    images: ["/images/ai-book-cover.jpg"],
+      "A practical guide to automate, amplify and work smarter with AI. First edition, by Shammah Nei.",
+    images: ["/images/the-new-way-of-work-cover.jpg"],
   },
 };
 
 export const viewport: Viewport = {
-  themeColor: "#080c10",
+  /* Matches --background in globals.css for each theme. The single #080c10 that
+     used to sit here was left over from the pre-Claude palette. */
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#faf9f5" },
+    { media: "(prefers-color-scheme: dark)", color: "#141413" },
+  ],
 };
 
 export default function RootLayout({

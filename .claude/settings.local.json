@@ -1,0 +1,23 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npx next *)",
+      "Bash(npx eslint *)",
+      "Bash(node \"/c/Users/MY PC/.claude/plugins/cache/impeccable/impeccable/3.7.0/skills/impeccable/scripts/context.mjs\")",
+      "Bash(ls -la \"/c/Users/MY PC/Downloads/\" 2>&1 | head -60)",
+      "WebFetch(domain:drive.google.com)",
+      "Bash(grep -iE \"automat|handbook|\\\\.epub$|ai.*book\")",
+      "Bash(grep -iE \"\\\\.pdf$|\\\\.epub$\")",
+      "Bash(curl -s -o /tmp/page.html -w \"HTTP %{http_code}  size=%{size_download}\\\\n\" http://localhost:3000/)",
+      "Bash(echo \"exit=$?\")",
+      "Bash(node scripts/contrast-audit.mjs)",
+      "Read(//tmp/**)",
+      "Bash(cd \"/c/Users/MY PC/Downloads/ebook site\" && grep -oE 'href=\"[^\"]*\\\\.css[^\"]*\"' /tmp/page.html | sort -u)",
+      "Bash(python3 -c ' *)",
+      "Bash(node -e ' *)",
+      "Bash(cd \"/c/Users/MY PC/Downloads/ebook site\" && grep -oE \"@media \\\\\\(prefers-reduced-motion: *reduce\\\\\\)\\\\s*\\\\{[^@]{0,400}\" /tmp/site.css | head -c 700)",
+      "Read(//c/tmp/**)",
+      "Bash(curl -s --max-time 20 \"https://shammahnei.substack.com/embed\" -o /tmp/embed.html -w \"status=%{http_code} bytes=%{size_download}\\\\n\")"
+    ]
+  }
+}

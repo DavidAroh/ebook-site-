@@ -110,7 +110,7 @@ export function CheckoutDialog({
                 </span>
               </div>
               <DialogTitle className="text-xl font-sans font-bold text-foreground">
-                Unlock Automating with AI
+                Unlock The New Way of Work
               </DialogTitle>
               <DialogDescription className="text-xs text-muted-foreground">
                 Instant delivery · DRM-Free PDF + EPUB files · Free lifetime updates
@@ -294,13 +294,17 @@ export function CheckoutDialog({
 
             {/* Direct Download Button */}
             <div className="p-4 rounded-2xl bg-secondary/50 border border-border space-y-3">
+              {/* Was a direct link to public/downloads — which served the same PDF
+                  the email gate protects, to anyone who guessed the URL. The only
+                  delivery path is the signed link, so this funnels to the form
+                  that mints one. */}
               <a
-                href="/downloads/automating-with-ai-beginner-handbook.pdf"
-                download="automating-with-ai-beginner-handbook.pdf"
+                href="#download"
+                onClick={() => onOpenChange(false)}
                 className="w-full h-12 rounded-xl bg-gold hover:bg-gold/90 text-ocean-deep font-bold text-sm shadow-[0_1px_6px_rgba(0,0,0,0.04)] flex items-center justify-center gap-2 transition-all"
               >
                 <CloudArrowDown weight="bold" className="size-4.5" />
-                <span>Download PDF Handbook (450 KB)</span>
+                <span>Email Me the Download Link</span>
               </a>
 
               <div className="flex items-center justify-between text-[11px] font-mono text-muted-foreground pt-1">

@@ -72,13 +72,22 @@
   --muted-foreground: #5f5c54; /* 6.3:1 on bg, 5.3:1 on secondary */
   --accent: #e8e6dc;
   --accent-foreground: #141413;
-  --destructive: #b91c1c; /* 6.1:1 — kept at hue 0 so it never reads as clay */
+  --destructive: #b91c1c; /* 6.1:1 bg · 5.2:1 secondary — kept at hue 0 so it never reads as clay */
   --border: #ddd9cd;
-  --input: #8a867b; /* 3.5:1 on bg — control boundaries per 1.4.11 */
+  --input: #857f75; /* 3.8:1 bg · 4.0:1 card · 3.2:1 secondary — control boundaries per 1.4.11 */
   --ring: #a64526; /* 5.7:1 */
   --clay: #d97757;
   --clay-ink: #a64526; /* 5.7:1 bg · 6.0:1 card · 4.8:1 secondary */
   --ink: #141413;
+  /* Unread words in the bio's reading sweep (see .read-word). Deliberately below
+     --muted-foreground so the lit edge reads as a sweep rather than a nudge:
+     3.4:1 here, which clears 1.4.11 but not the 4.5:1 body copy wants. That is
+     the trade — a reader parked mid-paragraph sees the words ahead of the sweep
+     under-contrast until they scroll on. Readers who cannot see the animation are
+     unaffected, since prefers-reduced-motion skips the split entirely and leaves
+     the paragraph at --muted-foreground. Dimming rather than blurring keeps the
+     unread text readable, just recessed. */
+  --read-dim: #8a877e; /* 3.4:1 on background */
   --radius: 0.75rem;
 }
 
@@ -97,14 +106,28 @@
   --muted-foreground: #b0aea5; /* Mid Gray — 8.3:1 bg · 7.5:1 card */
   --accent: #262523;
   --accent-foreground: #faf9f5;
-  --destructive: #ef4444; /* 4.9:1 */
+  /* Measured on card as well as background, because the signup form's error text
+     sits inside a bg-card panel, and that panel sits in a bg-secondary section:
+     red-500 clears 4.9:1 on the background but only 4.1:1 there, so the dark end
+     moves one stop up the ramp and clears all three. Every use of this token is
+     text, a border, or a /10–/20 tint — nothing fills with it and puts light text
+     on top — so lightening it only helps. */
+  --destructive: #f87171; /* 6.7:1 bg · 6.0:1 card · 5.5:1 secondary */
   --border: #302e2b;
-  --input: #6b6862; /* 3.3:1 on bg — 1.4.11 */
+  /* 1.4.11 has to hold on the surface the control actually sits on, not just on
+     the background: the signup input is inside a bg-card panel, and the value this
+     replaced measured 2.8:1 on the bg-secondary section around it. One stop out
+     from the surface in each theme clears every surface here at once. */
+  --input: #767370; /* 3.9:1 bg · 3.5:1 card · 3.3:1 secondary */
   --ring: #d97757; /* 5.9:1 */
   --clay: #d97757;
   /* Orange already clears AA on the dark surfaces, so ink and fill converge. */
   --clay-ink: #d97757; /* 5.9:1 bg · 5.3:1 card · 4.9:1 secondary */
   --ink: #141413;
+  /* Dark's dim end has to move the other way — down toward the background, not
+     up toward it — so it needs its own value rather than one derived token.
+     3.6:1, the same footing as the light end. */
+  --read-dim: #706d64; /* 3.6:1 on background */
 }
 
 /* Scroll-entry fade-in animation per the minimalist-ui protocol.
@@ -121,6 +144,82 @@
 .fade-in-visible {
   opacity: 1;
   transform: translateY(0);
+}
+
+/* Lesson-card icon animations (see components/lesson-icons.tsx). Only transform
+   opacity, and stroke-dashoffset are animated, so these stay off the layout
+   path. The global prefers-reduced-motion rule below neutralises all of them. */
+@keyframes icon-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-4px);
+  }
+}
+@keyframes icon-blink {
+  0%,
+  44% {
+    opacity: 1;
+  }
+  50%,
+  94% {
+    opacity: 0.12;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes icon-dash {
+  from {
+    stroke-dashoffset: 0;
+  }
+  to {
+    stroke-dashoffset: -97;
+  }
+}
+@keyframes icon-breathe {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.85;
+  }
+  50% {
+    transform: scale(1.09);
+    opacity: 1;
+  }
+}
+
+.icon-float-1,
+.icon-float-2,
+.icon-float-3 {
+  animation: icon-float 4.5s ease-in-out infinite;
+}
+.icon-float-2 {
+  animation-delay: -1.5s;
+}
+.icon-float-3 {
+  animation-delay: -3s;
+}
+.icon-blink {
+  animation: icon-blink 1.6s steps(1, end) infinite;
+}
+.icon-dash-1,
+.icon-dash-2,
+.icon-dash-3 {
+  animation: icon-dash 2.4s linear infinite;
+}
+.icon-dash-2 {
+  animation-delay: 0.45s;
+}
+.icon-dash-3 {
+  animation-delay: 0.7s;
+}
+.icon-breathe {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: icon-breathe 3.2s ease-in-out infinite;
 }
 
 @layer utilities {
@@ -141,11 +240,35 @@
     display: none;
   }
 
-  .perspective-1200 {
-    perspective: 1200px;
+  /* SplitText's mask wrapper is a clone of the line with `overflow: clip`, sized
+     to the line box — which on a tight display leading is shorter than the
+     glyphs, so descenders get shaved. The padding gives them room and the
+     matching negative margin keeps the block's height and rhythm unchanged. */
+  .reveal-line-mask {
+    padding-bottom: 0.18em;
+    margin-bottom: -0.18em;
   }
-  .transform-style-3d {
-    transform-style: preserve-3d;
+
+  /* One word of the bio's reading sweep. `--lit` is the only thing GSAP touches
+     — a plain 0-to-1 number it scrubs against the scroll — and the colour is
+     derived from it here rather than written as a concrete value by the tween.
+     Keeping it as a color-mix of live theme tokens is what makes a theme switch
+     part-way through the sweep re-resolve both ends of the ramp instead of
+     leaving stale ink on a background that has moved out from under it.
+
+     A dim-to-ink ramp, with nothing else layered on: the unread word stays sharp
+     and readable, just recessed. See :root and .dark for what the dim end costs
+     in contrast.
+
+     --read-dim is overridable per run, which is how the emphasised name in the
+     bio opts out of the sweep and sits at full ink from the start. */
+  .read-word {
+    --lit: 0;
+    color: color-mix(
+      in oklab,
+      var(--read-dim),
+      var(--foreground) calc(var(--lit) * 100%)
+    );
   }
 }
 

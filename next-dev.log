@@ -1,0 +1,12 @@
+
+> ebooksite@0.1.0 dev
+> next dev -p 3001
+
+▲ Next.js 16.3.2 (Turbopack)
+- Local:         http://localhost:3001
+- Network:       http://192.168.1.136:3001
+- Environments: .env.local
+✓ Ready in 1558ms
+✓ Running next.config.ts took 247ms
+
+[?25h
